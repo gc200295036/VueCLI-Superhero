@@ -1,28 +1,71 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+<main class="mw6 center">
+  <a class="f6 link dim ph3 pv2 mb2 dib white bg-black" href="#0" @click="addHero">Add X-Man</a>
+  <twitter-short-profile v-for="hero in heroes" :key="hero.name" :superhero="hero"/>
+  </main>
+
   </div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
+import TwitterShortProfile from "./components/TwitterShortProfile.vue";
+const heroes = [
+  {
+    name: "Prof. Xavier",
+    twitter: "@profx",
+    pic:
+      "http://www.animatedimages.org/data/media/450/animated-marvel-avatar-image-0004.gif"
+  },
+  {
+    name: "Spiderman",
+    twitter: "@spidey",
+    pic:
+      "http://www.animatedimages.org/data/media/450/animated-marvel-avatar-image-0008.gif"
+  },
+  {
+    name: "Wolverine",
+    pic:
+      "http://www.animatedimages.org/data/media/450/animated-marvel-avatar-image-0011.gif",
+    twitter: "@logan"
+  },
+  {
+    name: "Cyclops",
+    twitter: "@oneye",
+    pic:
+      "http://www.animatedimages.org/data/media/450/animated-marvel-avatar-image-0005.gif"
+  },
+  {
+    name: "Storm",
+    twitter: "@rainsitpours",
+    pic:
+      "http://www.animatedimages.org/data/media/450/animated-marvel-avatar-image-0007.gif"
+  },
+  {
+    name: "Phoenix",
+    twitter: "@jeangrey",
+    pic:
+      "http://www.animatedimages.org/data/media/450/animated-marvel-avatar-image-0016.gif"
+  }
+];
 
 export default {
   name: "App",
   components: {
-    HelloWorld
+    TwitterShortProfile,
+  },
+    data: function() {
+    return {
+      storage: heroes,
+      heroes: [],
+    };
+  },
+  methods: {
+    addHero() {
+       if (this.storage.length > 0) {
+      this.heroes.push(this.storage.pop());
+       }
+    }
   }
 };
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
